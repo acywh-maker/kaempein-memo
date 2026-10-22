@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAEMPEIN memo · 홈</title>
+<!-- 파비콘: 파일 하나 규칙 때문에 SVG를 직접 넣음 (색은 DESIGN.md 팔레트 Ink·Cream·Lavender 값) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231a1a1a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='%23ffffeb'%3EK%3C/text%3E%3Cpath d='M14 52 Q20 48 26 52 T38 52 T50 52' stroke='%23f0d7ff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- DESIGN.md 8-1 폰트 불러오기 (수정 금지) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Figtree:wght@400;500;600;700&family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+<style>
+/* ===== DESIGN.md 8-2 CSS 변수 (수정 금지) ===== */
+:root {
+  /* Colors */
+  --color-cream: #ffffeb;
+  --color-ink: #1a1a1a;
+  --color-lavender: #f0d7ff;
+  --color-lavender-hover: #e6c4fa;
+  --color-forest: #034f46;
+  --color-ember: #ffa946;
+  --color-stone: #e4e4d0;
+  --color-fog: #8a8a80;
+  --color-fog-dark: #6b6b62;
+  --color-charcoal: #222222;
+  --color-white: #ffffff;
+
+  /* Fonts */
+  --font-display: 'EB Garamond', 'Noto Serif KR', serif;
+  --font-body: 'Figtree', 'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
+
+  /* Type scale */
+  --text-caption: 14px;     --leading-caption: 1.4;
+  --text-body-sm: 16px;     --leading-body-sm: 1.5;
+  --text-body: 20px;        --leading-body: 1.5;
+  --text-subheading: 24px;  --leading-subheading: 1.4;
+  --text-heading-sm: 32px;  --leading-heading-sm: 1.3;  --tracking-heading-sm: -0.03em;
+  --text-heading: 48px;     --leading-heading: 1.15;    --tracking-heading: -0.02em;
+  --text-heading-lg: 64px;  --leading-heading-lg: 1.1;  --tracking-heading-lg: -0.03em;
+  --text-display: 120px;    --leading-display: 1.05;    --tracking-display: -0.03em;
+
+  /* Spacing (8px base) */
+  --space-8: 8px;   --space-16: 16px; --space-24: 24px; --space-32: 32px;
+  --space-40: 40px; --space-48: 48px; --space-56: 56px; --space-64: 64px;
+  --space-80: 80px; --space-96: 96px; --space-128: 128px;
+
+  /* Radius */
+  --radius-tag: 8px;
+  --radius-control: 12px;
+  --radius-card: 32px;
+  --radius-section: 64px;
+  --radius-pill: 9999px;
+
+  /* Border */
+  --border-ink: 2px solid var(--color-ink);
+
+  /* Layout */
+  --page-max-width: 1200px;
+  --section-gap: 96px;
+  --card-padding: 32px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --text-display: 56px;
+    --text-heading-lg: 40px;
+    --text-heading: 32px;
+    --section-gap: 48px;
+    --card-padding: 24px;
+    --radius-section: 32px;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-body-sm);
+  word-break: keep-all; /* 한글 단어 중간에서 줄바꿈되지 않게 */
+}
+
+/* ===== DESIGN.md 8-3 기본 컴포넌트 (수정 금지) ===== */
+.btn {
+  font: 500 16px/1 var(--font-body);
+  padding: 16px 24px;
+  border: var(--border-ink);
+  border-radius: var(--radius-control);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.btn--primary   { background: var(--color-lavender); }
+.btn--primary:hover { background: var(--color-lavender-hover); }
+.btn--secondary { background: var(--color-cream); }
+.btn--secondary:hover { background: var(--color-stone); }
+.btn:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+
+.card {
+  background: var(--color-cream);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  padding: var(--card-padding);
+}
+.card--dark {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  border: none;
+  border-radius: var(--radius-section);
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 14px/1 var(--font-body);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+}
+.badge--status { background: var(--color-forest); color: var(--color-cream); }
+
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+/* ===== 공통 메뉴 블록 (4페이지 동일, 수정 금지) ===== */
+body > div:first-child > nav {
+  max-width: var(--page-max-width);
+  margin: var(--space-16) auto !important;
+  padding: 12px var(--space-24) !important;
+  background: var(--color-cream);
+  border: var(--border-ink) !important;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+}
+body > div:first-child > nav a {
+  color: var(--color-charcoal);
+  font-weight: 500;
+  text-decoration: none;
+}
+body > div:first-child > nav a:hover { text-decoration: underline; }
+body > div:first-child > p {
+  max-width: var(--page-max-width);
+  margin: 0 auto !important;
+  padding: 0 var(--space-24) !important;
+  color: var(--color-fog-dark);
+  font-size: var(--text-caption);
+}
+/* ===== 공통 메뉴 블록 끝 ===== */
+
+/* ===== 홈 전용 스타일 ===== */
+*, *::before, *::after { box-sizing: border-box; }
+.home-wrap {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--space-48) var(--space-24) var(--space-64);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-64);
+}
+.home-hero { display: flex; flex-direction: column; gap: var(--space-16); }
+.home-hero .heading-display { margin: 0; }
+.home-mark { position: relative; display: inline-block; }
+.home-mark svg {
+  position: absolute; left: 0; bottom: -0.12em;
+  width: 100%; height: 0.2em; overflow: visible;
+}
+.home-mark path { stroke: var(--color-lavender); stroke-width: 4; fill: none; stroke-linecap: round; }
+.home-lead { margin: 0; font-size: var(--text-body); line-height: var(--leading-body); max-width: 40ch; }
+.home-meta { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.home-tag {
+  display: inline-flex; align-items: center;
+  font: 500 14px/1 var(--font-body);
+  padding: 8px 16px;
+  border-radius: var(--radius-tag);
+  background: var(--color-ink); color: var(--color-cream);
+}
+
+.home-slot { display: flex; flex-direction: column; gap: var(--space-32); }
+.home-slot[hidden] { display: none; }
+.home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-32); }
+.home-card { display: flex; flex-direction: column; gap: var(--space-16); min-width: 0; }
+.home-card h2, .home-card h3 { margin: 0; }
+.home-h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: var(--text-heading-sm); line-height: var(--leading-heading-sm);
+  letter-spacing: var(--tracking-heading-sm);
+}
+.home-label { margin: 0; font-size: var(--text-caption); color: var(--color-fog-dark); }
+.card--dark .home-label { color: var(--color-stone); }
+.home-big {
+  margin: 0;
+  font-family: var(--font-display); font-weight: 400;
+  font-size: var(--text-heading-lg); line-height: var(--leading-heading-lg);
+  letter-spacing: var(--tracking-heading-lg);
+}
+.home-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--space-16); margin: 0; }
+.home-stats div { display: flex; flex-direction: column; gap: var(--space-8); }
+.home-stats dt { font-size: var(--text-caption); color: var(--color-stone); }
+.home-stats dd { margin: 0; font-size: var(--text-subheading); line-height: var(--leading-subheading); }
+.home-msg { margin: 0; }
+
+.home-form { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.home-input {
+  flex: 1 1 220px; min-width: 0;
+  font: 400 16px/1.5 var(--font-body);
+  padding: 12px 16px;
+  background: var(--color-cream); color: var(--color-ink);
+  border: var(--border-ink);
+  border-radius: var(--radius-control);
+}
+.home-input::placeholder { color: var(--color-fog-dark); }
+.home-input:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+.home-actions { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.home-actions[hidden] { display: none; }
+.home-actions .btn { flex: 1 1 140px; }
+.btn[aria-pressed="true"] { background: var(--color-ink); color: var(--color-cream); }
+.home-goal {
+  margin: 0;
+  font-size: var(--text-subheading); line-height: var(--leading-subheading);
+  overflow-wrap: anywhere;
+}
+
+.home-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-32); }
+.home-link { color: inherit; text-decoration: none; }
+.home-link:hover { background: var(--color-stone); }
+.home-link:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+.home-link p { margin: 0; color: var(--color-fog-dark); }
+
+.home-api { margin-top: var(--space-16); }
+.home-api h2 { font-family: var(--font-body); font-size: var(--text-body); font-weight: 600; }
+.home-api code {
+  display: block; overflow-wrap: anywhere;
+  font-size: var(--text-caption); line-height: var(--leading-caption);
+  color: var(--color-stone);
+}
+.home-api a { color: var(--color-cream); }
+.home-api a:focus-visible { outline: 3px solid var(--color-lavender); outline-offset: 2px; }
+
+@media (max-width: 480px) {
+  .home-wrap { padding: var(--space-32) var(--space-16) var(--space-48); gap: var(--space-48); }
+  .home-grid, .home-links { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<main class="home-wrap">
+  <header class="home-hero">
+    <h1 class="heading-display">KAEMPEIN <span class="home-mark">memo<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 5"/></svg></span></h1>
+    <p class="home-lead">출근·점심·퇴근 전에 오늘 목표를 1분 만에 챙겨요.</p>
+    <div class="home-meta">
+      <span class="home-tag" id="today-tag">오늘</span>
+      <span class="badge badge--status" id="weather-mini">날씨 불러오는 중</span>
+    </div>
+  </header>
+
+  <!-- 아침: 날씨 + 오늘 목표 입력 -->
+  <section class="home-slot" data-slot="morning" aria-labelledby="m-title">
+    <div class="home-grid">
+      <article class="card card--dark home-card">
+        <h2 class="home-h2" id="m-title">오늘 서울 날씨</h2>
+        <p class="home-big" id="w-temp">—</p>
+        <dl class="home-stats">
+          <div><dt>최고 / 최저</dt><dd id="w-range">—</dd></div>
+          <div><dt>강수확률</dt><dd id="w-rain">—</dd></div>
+        </dl>
+        <p class="home-label" id="w-time">기준 시각을 불러오는 중이에요</p>
+      </article>
+
+      <article class="card home-card">
+        <h2 class="home-h2">오늘의 마케팅 목표</h2>
+        <p class="home-label">하루에 하나만 정해요. 점심과 저녁에 다시 확인해요.</p>
+        <form class="home-form" id="goal-form">
+          <label for="goal-input" class="home-label" style="flex-basis:100%">목표</label>
+          <input class="home-input" id="goal-input" maxlength="60" autocomplete="off" placeholder="예: 신제품 인스타 카피 3안 쓰기" required>
+          <button class="btn btn--primary" type="submit">목표 저장</button>
+        </form>
+        <p class="home-msg" id="goal-saved" aria-live="polite"></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 점심: 목표 중간 점검 -->
+  <section class="home-slot" data-slot="lunch" aria-labelledby="l-title">
+    <div class="home-grid">
+      <article class="card home-card">
+        <h2 class="home-h2" id="l-title">목표 중간 점검</h2>
+        <p class="home-label">아침에 정한 목표</p>
+        <p class="home-goal" data-goal-text>—</p>
+        <div class="home-actions" data-need-goal>
+          <button class="btn btn--secondary" type="button" data-check="progress" aria-pressed="false">진행 중</button>
+          <button class="btn btn--secondary" type="button" data-check="stuck" aria-pressed="false">막힘</button>
+        </div>
+        <p class="home-msg" id="check-msg" aria-live="polite"></p>
+      </article>
+      <article class="card card--dark home-card">
+        <h2 class="home-h2">오후 한 줄 팁</h2>
+        <p class="home-msg" id="lunch-tip">—</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 저녁: 달성 체크 + 방문 요약 -->
+  <section class="home-slot" data-slot="evening" aria-labelledby="e-title">
+    <div class="home-grid">
+      <article class="card home-card">
+        <h2 class="home-h2" id="e-title">오늘 목표, 해냈나요?</h2>
+        <p class="home-goal" data-goal-text>—</p>
+        <div class="home-actions" data-need-goal>
+          <button class="btn btn--secondary" type="button" data-done="yes" aria-pressed="false">달성했어요</button>
+          <button class="btn btn--secondary" type="button" data-done="no" aria-pressed="false">내일 이어서</button>
+        </div>
+        <p class="home-msg" id="done-msg" aria-live="polite"></p>
+      </article>
+      <article class="card card--dark home-card">
+        <h2 class="home-h2">오늘 요약</h2>
+        <dl class="home-stats">
+          <div><dt>오늘 방문</dt><dd id="s-visits">—</dd></div>
+          <div><dt>연속 사용</dt><dd id="s-streak">—</dd></div>
+          <div><dt>점심 점검</dt><dd id="s-check">—</dd></div>
+          <div><dt>목표 결과</dt><dd id="s-done">—</dd></div>
+        </dl>
+      </article>
+    </div>
+  </section>
+
+  <!-- 다른 페이지 바로가기 -->
+  <section aria-labelledby="go-title" class="home-slot">
+    <h2 class="home-h2" id="go-title" style="margin:0">바로가기</h2>
+    <div class="home-links">
+      <a class="card home-card home-link" href="./ad.html">
+        <h3 class="home-h2">광고비 환산</h3>
+        <p>오늘 광고 예산을 달러에서 원화로</p>
+      </a>
+      <a class="card home-card home-link" href="./season.html">
+        <h3 class="home-h2">시즌 D-day</h3>
+        <p>다가오는 공휴일과 캠페인 준비</p>
+      </a>
+      <a class="card home-card home-link" href="./weather.html">
+        <h3 class="home-h2">날씨 마케팅 소재</h3>
+        <p>날씨에 맞는 오늘의 콘텐츠 아이디어</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- 🔌 이 화면이 쓰는 API -->
+  <footer class="card card--dark home-card home-api">
+    <h2>🔌 이 화면이 쓰는 API</h2>
+    <p class="home-msg">서울 현재 날씨·오늘 최고/최저·강수확률 (API 키 없음)</p>
+    <code id="api-url"></code>
+    <p class="home-msg"><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a></p>
+  </footer>
+</main>
+
+<script>
+const API = {
+  weather: "https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.978&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FSeoul", // 🔌 Open-Meteo 서울 날씨 (키 없음)
+};
+
+// WMO 날씨 코드 → 한국어
+function weatherText(code) {
+  if (code === 0) return "☀️ 맑음";
+  if (code <= 2) return "🌤️ 구름 조금";
+  if (code === 3) return "☁️ 흐림";
+  if (code <= 48) return "🌫️ 안개";
+  if (code <= 67) return "🌧️ 비";
+  if (code <= 77) return "🌨️ 눈";
+  if (code <= 82) return "🌦️ 소나기";
+  if (code <= 86) return "🌨️ 눈 소나기";
+  return "⛈️ 뇌우";
+}
+
+const LUNCH_TIPS = [
+  "오후 2~3시는 집중이 떨어지는 시간이에요. 목표를 작은 단계 하나로 쪼개 보세요.",
+  "막혔다면 비슷한 캠페인 레퍼런스 3개만 빠르게 모아 보세요.",
+  "퇴근 전에 공유할 결과물 형태(초안·캡처·링크)를 지금 정해 두면 편해요.",
+];
+
+// 공통 코드(</body> 바로 위)가 먼저 실행된 뒤에 SLOT·load·save를 써요
+document.addEventListener("DOMContentLoaded", () => {
+  const $ = (id) => document.getElementById(id);
+  $("today-tag").textContent = TODAY;
+  $("api-url").textContent = API.weather;
+
+  // ----- 저장된 기록 읽기 (오늘 날짜 것만) -----
+  const todayOnly = (rec) => (rec && rec.date === TODAY ? rec : null);
+  let goal = todayOnly(load("home_goal", null));
+  let check = todayOnly(load("home_check", null));
+  let done = todayOnly(load("home_done", null));
+
+  const CHECK_NAME = { progress: "진행 중", stuck: "막힘" };
+  const DONE_NAME = { yes: "달성", no: "내일 이어서" };
+
+  function render() {
+    document.querySelectorAll("[data-goal-text]").forEach((el) => {
+      el.textContent = goal ? goal.text : "아직 오늘 목표가 없어요. 아침에 목표를 정해보세요.";
+    });
+    document.querySelectorAll("[data-need-goal]").forEach((el) => { el.hidden = !goal; });
+
+    if (goal) $("goal-input").value = goal.text;
+    $("goal-saved").textContent = goal ? "✓ 저장됨 · 새로고침해도 남아 있어요" : "";
+
+    document.querySelectorAll("[data-check]").forEach((b) => {
+      b.setAttribute("aria-pressed", String(!!check && check.status === b.dataset.check));
+    });
+    $("check-msg").textContent = check ? "✓ 지금 상태: " + CHECK_NAME[check.status] : "";
+
+    document.querySelectorAll("[data-done]").forEach((b) => {
+      b.setAttribute("aria-pressed", String(!!done && done.result === b.dataset.done));
+    });
+    $("done-msg").textContent = done
+      ? (done.result === "yes" ? "✓ 수고했어요! 오늘 목표 달성" : "✓ 내일 아침에 이어서 정해요")
+      : "";
+
+    const visits = load("visits", { count: 0 });
+    const streak = load("streak", { days: 0 });
+    $("s-visits").textContent = visits.count + "번";
+    $("s-streak").textContent = streak.days + "일째";
+    $("s-check").textContent = check ? CHECK_NAME[check.status] : "기록 없음";
+    $("s-done").textContent = done ? DONE_NAME[done.result] : (goal ? "체크 전" : "목표 없음");
+  }
+
+  // ----- 아침: 목표 저장 -----
+  $("goal-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = $("goal-input").value.trim();
+    if (!text) return;
+    goal = { date: TODAY, text };
+    save("home_goal", goal);
+    render();
+  });
+
+  // ----- 점심: 중간 점검 -----
+  document.querySelectorAll("[data-check]").forEach((b) => b.addEventListener("click", () => {
+    check = { date: TODAY, status: b.dataset.check };
+    save("home_check", check);
+    render();
+  }));
+
+  // ----- 저녁: 달성 체크 -----
+  document.querySelectorAll("[data-done]").forEach((b) => b.addEventListener("click", () => {
+    done = { date: TODAY, result: b.dataset.done };
+    save("home_done", done);
+    render();
+  }));
+
+  $("lunch-tip").textContent = LUNCH_TIPS[new Date().getDate() % LUNCH_TIPS.length];
+  render();
+  loadWeather();
+
+  // ----- 🔌 날씨 불러오기 (실패해도 페이지는 계속 동작) -----
+  async function loadWeather() {
+    const fail = () => {
+      $("weather-mini").textContent = "날씨: 데이터를 불러오지 못했어요";
+      $("w-temp").textContent = "—";
+      $("w-time").textContent = "데이터를 불러오지 못했어요. 잠시 후 새로고침해 주세요.";
+    };
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 8000);
+      const res = await fetch(API.weather, { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      const c = data.current, d = data.daily;
+      const temp = Math.round(c.temperature_2m);
+      const sky = weatherText(c.weather_code);
+      const when = c.time.replace("T", " ");
+      $("weather-mini").textContent = "서울 " + sky + " " + temp + "°C";
+      $("w-temp").textContent = sky + " " + temp + "°C";
+      $("w-range").textContent = Math.round(d.temperature_2m_max[0]) + "° / " + Math.round(d.temperature_2m_min[0]) + "°";
+      $("w-rain").textContent = (d.precipitation_probability_max[0] ?? "—") + "%";
+      $("w-time").textContent = "기준 " + when + " (한국 시간) · Open-Meteo";
+    } catch (e) {
+      fail();
+    }
+  }
+});
+</script>
+
+<script>
+// ===== 공통: 상단 메뉴 + 시간대 + 방문 기록 (4페이지 동일) =====
+function getSlot() {
+  const t = new URLSearchParams(location.search).get("t");
+  if (["morning", "lunch", "evening"].includes(t)) return t;
+  const h = new Date().getHours();
+  if (h >= 6 && h < 11) return "morning";
+  if (h >= 11 && h < 16) return "lunch";
+  return "evening";
+}
+const SLOT = getSlot();
+const TODAY = new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD
+function load(k, d) { try { const v = localStorage.getItem("mkt_" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+function save(k, v) { try { localStorage.setItem("mkt_" + k, JSON.stringify(v)); } catch (e) {} }
+
+let visits = load("visits", { date: TODAY, count: 0 });
+if (visits.date !== TODAY) visits = { date: TODAY, count: 0 };
+visits.count++; save("visits", visits);
+
+let streak = load("streak", { last: null, days: 0 });
+if (streak.last !== TODAY) {
+  const y = new Date(Date.now() - 86400000).toLocaleDateString("sv-SE");
+  streak.days = streak.last === y ? streak.days + 1 : 1;
+  streak.last = TODAY; save("streak", streak);
+}
+
+const SLOT_NAME = { morning: "🌅 아침", lunch: "☀️ 점심", evening: "🌙 저녁" }[SLOT];
+const bar = document.createElement("div");
+bar.innerHTML = `<nav style="padding:10px;border-bottom:1px solid #ddd">
+  <a href="index.html">홈</a> · <a href="ad.html">광고비 환산</a> ·
+  <a href="season.html">시즌 D-day</a> · <a href="weather.html">날씨 소재</a></nav>
+  <p style="padding:0 10px">${SLOT_NAME} · 오늘 ${visits.count}번째 방문 · 연속 ${streak.days}일째</p>`;
+document.body.prepend(bar);
+
+// data-slot="morning|lunch|evening" 이 붙은 영역 중 지금 시간대만 보이기
+document.querySelectorAll("[data-slot]").forEach(el => { el.hidden = el.dataset.slot !== SLOT; });
+</script>
+</body>
+</html>
