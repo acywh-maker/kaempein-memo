@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>광고비 환산 · 마케터 데일리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Figtree:wght@400;500;600;700&family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root {
+  /* Colors */
+  --color-cream: #ffffeb;
+  --color-ink: #1a1a1a;
+  --color-lavender: #f0d7ff;
+  --color-lavender-hover: #e6c4fa;
+  --color-forest: #034f46;
+  --color-ember: #ffa946;
+  --color-stone: #e4e4d0;
+  --color-fog: #8a8a80;
+  --color-fog-dark: #6b6b62;
+  --color-charcoal: #222222;
+  --color-white: #ffffff;
+
+  /* Fonts */
+  --font-display: 'EB Garamond', 'Noto Serif KR', serif;
+  --font-body: 'Figtree', 'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
+
+  /* Type scale */
+  --text-caption: 14px;     --leading-caption: 1.4;
+  --text-body-sm: 16px;     --leading-body-sm: 1.5;
+  --text-body: 20px;        --leading-body: 1.5;
+  --text-subheading: 24px;  --leading-subheading: 1.4;
+  --text-heading-sm: 32px;  --leading-heading-sm: 1.3;  --tracking-heading-sm: -0.03em;
+  --text-heading: 48px;     --leading-heading: 1.15;    --tracking-heading: -0.02em;
+  --text-heading-lg: 64px;  --leading-heading-lg: 1.1;  --tracking-heading-lg: -0.03em;
+  --text-display: 120px;    --leading-display: 1.05;    --tracking-display: -0.03em;
+
+  /* Spacing (8px base) */
+  --space-8: 8px;   --space-16: 16px; --space-24: 24px; --space-32: 32px;
+  --space-40: 40px; --space-48: 48px; --space-56: 56px; --space-64: 64px;
+  --space-80: 80px; --space-96: 96px; --space-128: 128px;
+
+  /* Radius */
+  --radius-tag: 8px;
+  --radius-control: 12px;
+  --radius-card: 32px;
+  --radius-section: 64px;
+  --radius-pill: 9999px;
+
+  /* Border */
+  --border-ink: 2px solid var(--color-ink);
+
+  /* Layout */
+  --page-max-width: 1200px;
+  --section-gap: 96px;
+  --card-padding: 32px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --text-display: 56px;
+    --text-heading-lg: 40px;
+    --text-heading: 32px;
+    --section-gap: 48px;
+    --card-padding: 24px;
+    --radius-section: 32px;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-body-sm);
+  word-break: keep-all; /* 한글 단어 중간에서 줄바꿈되지 않게 */
+}
+
+.btn {
+  font: 500 16px/1 var(--font-body);
+  padding: 16px 24px;
+  border: var(--border-ink);
+  border-radius: var(--radius-control);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.btn--primary   { background: var(--color-lavender); }
+.btn--primary:hover { background: var(--color-lavender-hover); }
+.btn--secondary { background: var(--color-cream); }
+.btn--secondary:hover { background: var(--color-stone); }
+.btn:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+
+.card {
+  background: var(--color-cream);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  padding: var(--card-padding);
+}
+.card--dark {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  border: none;
+  border-radius: var(--radius-section);
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 14px/1 var(--font-body);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+}
+.badge--status { background: var(--color-forest); color: var(--color-cream); }
+
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+/* ===== 공통 메뉴 블록 (4페이지 동일, 수정 금지) ===== */
+body > div:first-child > nav {
+  max-width: var(--page-max-width);
+  margin: var(--space-16) auto !important;
+  padding: 12px var(--space-24) !important;
+  background: var(--color-cream);
+  border: var(--border-ink) !important;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+}
+body > div:first-child > nav a {
+  color: var(--color-charcoal);
+  font-weight: 500;
+  text-decoration: none;
+}
+body > div:first-child > nav a:hover { text-decoration: underline; }
+body > div:first-child > p {
+  max-width: var(--page-max-width);
+  margin: 0 auto !important;
+  padding: 0 var(--space-24) !important;
+  color: var(--color-fog-dark);
+  font-size: var(--text-caption);
+}
+/* ===== 공통 메뉴 블록 끝 ===== */
+
+/* ===== 광고비 환산 페이지 전용 ===== */
+.ad-page, .ad-page * { box-sizing: border-box; }
+.ad-page [hidden] { display: none !important; }
+
+.ad-page {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-24) var(--space-96);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+/* 상단: 오늘 환율 (다크 카드) */
+.ad-hero {
+  padding: var(--space-56) var(--space-64);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+.ad-badge-outline { border: 2px solid var(--color-white); color: var(--color-cream); }
+.ad-dot { width: var(--space-8); height: var(--space-8); border-radius: 50%; background: var(--color-ember); }
+.ad-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-heading);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+}
+.ad-rate { margin: 0; overflow-wrap: anywhere; }
+.ad-rate-meta, .ad-error { margin: 0; font-size: var(--text-body-sm); color: var(--color-cream); }
+.ad-error { font-weight: 600; }
+
+/* 시간대 미리보기 링크 */
+.ad-slots { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8); }
+.ad-slots-label { font-size: var(--text-caption); color: var(--color-fog-dark); margin-right: var(--space-8); }
+.ad-slots a {
+  padding: var(--space-8) var(--space-16);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-weight: 500;
+  font-size: var(--text-caption);
+  text-decoration: none;
+}
+.ad-slots a:hover { background: var(--color-stone); }
+.ad-slots a[aria-current="true"] { background: var(--color-stone); text-decoration: underline; }
+.ad-slots a:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+
+/* 카드 안 */
+.ad-card-title {
+  margin: 0 0 var(--space-8);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-heading-sm);
+  letter-spacing: var(--tracking-heading-sm);
+}
+.ad-sub { margin: 0 0 var(--space-24); color: var(--color-fog-dark); }
+.ad-sub a { color: var(--color-ink); }
+
+.ad-form { display: flex; flex-direction: column; gap: var(--space-8); }
+.ad-form label { font-weight: 600; }
+.ad-row { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.ad-input {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 12px 16px;
+  border: var(--border-ink);
+  border-radius: var(--radius-control);
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font: 400 var(--text-body-sm) var(--font-body);
+}
+.ad-input::placeholder { color: var(--color-fog-dark); }
+.ad-input:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+.ad-hint { margin: 0; font-size: var(--text-caption); color: var(--color-fog-dark); }
+
+/* 결과 (라벤더 강조 카드) */
+.ad-result {
+  margin-top: var(--space-24);
+  padding: var(--card-padding);
+  background: var(--color-lavender);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+}
+.ad-result-label { margin: 0 0 var(--space-8); font-size: var(--text-caption); font-weight: 500; }
+.ad-big {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-heading-lg);
+  line-height: var(--leading-heading-lg);
+  letter-spacing: var(--tracking-heading-lg);
+  overflow-wrap: anywhere;
+}
+.ad-detail { margin: var(--space-16) 0 0; }
+
+.ad-bar {
+  height: var(--space-16);
+  margin-top: var(--space-16);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-cream);
+  overflow: hidden;
+}
+.ad-bar-fill { display: block; height: 100%; width: 0; background: var(--color-forest); }
+.ad-over { display: flex; align-items: center; gap: var(--space-8); margin: var(--space-8) 0 0; font-weight: 600; }
+
+.ad-saved {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8);
+  margin: var(--space-16) 0 0;
+  font-size: var(--text-caption);
+  color: var(--color-fog-dark);
+}
+
+/* 날짜별 기록 표 */
+.ad-table-wrap { overflow-x: auto; }
+.ad-table { width: 100%; border-collapse: collapse; }
+.ad-table th, .ad-table td {
+  padding: var(--space-8) var(--space-16) var(--space-8) 0;
+  border-bottom: 2px solid var(--color-stone);
+  text-align: left;
+  white-space: nowrap;
+}
+.ad-table th { font-size: var(--text-caption); font-weight: 500; color: var(--color-fog-dark); }
+.ad-table .ad-num { text-align: right; }
+.ad-table tr > :last-child { padding-right: 0; }
+
+/* 🔌 API 상자 */
+.ad-api ul { margin: 0; padding-left: var(--space-24); display: flex; flex-direction: column; gap: var(--space-8); }
+.ad-api code {
+  padding: 0 var(--space-8);
+  border-radius: var(--radius-tag);
+  background: var(--color-stone);
+  font-size: var(--text-caption);
+  word-break: break-all;
+}
+.ad-api a { color: var(--color-ink); }
+
+@media (max-width: 768px) {
+  .ad-page { padding: var(--space-16) var(--space-16) var(--space-48); gap: var(--space-24); }
+  .ad-hero { padding: var(--space-40) var(--space-24); }
+  .ad-row .btn { flex: 1 1 100%; }
+}
+</style>
+</head>
+<body>
+<main class="ad-page">
+  <!-- 상단: 오늘 환율 -->
+  <header class="card card--dark ad-hero" aria-live="polite">
+    <span class="badge ad-badge-outline"><span class="ad-dot" aria-hidden="true"></span>USD → KRW 환율</span>
+    <h1 class="ad-title">광고비 환산</h1>
+    <p class="heading-display ad-rate" id="rate-value">…</p>
+    <p class="ad-rate-meta" id="rate-meta">환율을 불러오는 중…</p>
+    <p class="ad-error" id="rate-error" hidden></p>
+  </header>
+
+  <!-- 시간대 미리보기 (?t=) -->
+  <nav class="ad-slots" aria-label="시간대 미리보기">
+    <span class="ad-slots-label">시간대 보기</span>
+    <a href="?t=morning" data-t="morning">아침</a>
+    <a href="?t=lunch" data-t="lunch">점심</a>
+    <a href="?t=evening" data-t="evening">저녁</a>
+  </nav>
+
+  <!-- 아침: 오늘 예산 입력 → 원화 환산 -->
+  <section data-slot="morning" class="card">
+    <h2 class="ad-card-title">오늘 예산 정하기</h2>
+    <p class="ad-sub">달러 예산을 넣으면 원화로 바로 바꿔 드려요.</p>
+    <form class="ad-form" id="budget-form" novalidate>
+      <label for="budget-input">오늘 광고 예산 (USD)</label>
+      <div class="ad-row">
+        <input class="ad-input" id="budget-input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="예: 500" autocomplete="off">
+        <button class="btn btn--primary" type="submit">예산 저장</button>
+      </div>
+      <p class="ad-hint" id="budget-hint"></p>
+    </form>
+    <div class="ad-result">
+      <p class="ad-result-label">원화로 환산하면</p>
+      <p class="ad-big" id="budget-krw">—</p>
+    </div>
+    <p class="ad-saved" id="budget-saved" hidden><span class="badge badge--status">✓ 저장됨</span><span id="budget-saved-text"></span></p>
+  </section>
+
+  <!-- 점심: 쓴 금액 입력 + 소진율 -->
+  <section data-slot="lunch" class="card">
+    <h2 class="ad-card-title">중간 소진율 점검</h2>
+    <p class="ad-sub" id="lunch-budget"></p>
+    <form class="ad-form" id="spent-form" novalidate>
+      <label for="spent-input">지금까지 쓴 금액 (USD)</label>
+      <div class="ad-row">
+        <input class="ad-input" id="spent-input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="예: 230" autocomplete="off">
+        <button class="btn btn--primary" type="submit">소진율 확인</button>
+      </div>
+      <p class="ad-hint" id="spent-hint"></p>
+    </form>
+    <div class="ad-result">
+      <p class="ad-result-label">예산 소진율</p>
+      <p class="ad-big" id="lunch-pct">—</p>
+      <div class="ad-bar" role="progressbar" aria-label="예산 소진율" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="lunch-bar"><span class="ad-bar-fill" id="lunch-bar-fill"></span></div>
+      <p class="ad-detail" id="lunch-detail"></p>
+      <p class="ad-over" id="lunch-over" hidden><span class="ad-dot" aria-hidden="true"></span><span id="lunch-over-text"></span></p>
+    </div>
+  </section>
+
+  <!-- 저녁: 최종 지출 -->
+  <section data-slot="evening" class="card">
+    <h2 class="ad-card-title">오늘 최종 지출</h2>
+    <p class="ad-sub" id="evening-budget"></p>
+    <form class="ad-form" id="final-form" novalidate>
+      <label for="final-input">오늘 최종 지출 (USD)</label>
+      <div class="ad-row">
+        <input class="ad-input" id="final-input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="예: 480" autocomplete="off">
+        <button class="btn btn--primary" type="submit">오늘 기록 저장</button>
+      </div>
+      <p class="ad-hint" id="final-hint"></p>
+    </form>
+    <div class="ad-result">
+      <p class="ad-result-label">원화 최종 지출</p>
+      <p class="ad-big" id="final-krw">—</p>
+      <p class="ad-detail" id="final-detail"></p>
+    </div>
+    <p class="ad-saved" id="final-saved" hidden><span class="badge badge--status">✓ 저장됨</span><span id="final-saved-text"></span></p>
+  </section>
+
+  <!-- 저녁: 날짜별 기록 -->
+  <section data-slot="evening" class="card">
+    <h2 class="ad-card-title">날짜별 기록</h2>
+    <p class="ad-sub">최근 14일까지 보여 드려요. 원화는 저장할 때의 환율로 계산했어요.</p>
+    <p class="ad-hint" id="history-empty">아직 기록이 없어요.</p>
+    <div class="ad-table-wrap" id="history-wrap" hidden>
+      <table class="ad-table">
+        <thead>
+          <tr>
+            <th scope="col">날짜</th>
+            <th scope="col" class="ad-num">예산</th>
+            <th scope="col" class="ad-num">지출</th>
+            <th scope="col" class="ad-num">원화 지출</th>
+            <th scope="col" class="ad-num">소진율</th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 🔌 이 화면이 쓰는 API -->
+  <section class="card ad-api" aria-label="이 화면이 쓰는 API">
+    <h2 class="ad-card-title">🔌 이 화면이 쓰는 API</h2>
+    <ul>
+      <li>주소: <code id="api-url"></code></li>
+      <li>출처: <a href="https://frankfurter.dev" target="_blank" rel="noopener">Frankfurter</a> (유럽중앙은행 고시 환율, 키 없음)</li>
+      <li>기준 날짜: <span id="api-date">—</span></li>
+      <li>상태: <span id="api-status">불러오는 중…</span></li>
+    </ul>
+  </section>
+</main>
+
+<script>
+const API = {
+  rate: "https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW", // 🔌 Frankfurter 환율 (USD→KRW, 키 없음)
+};
+
+// 광고비 환산 페이지 로직. load/save/SLOT/TODAY는 아래 공통 코드에서 정의되므로 DOM 로드 후에 실행한다.
+const $ = id => document.getElementById(id);
+let rate = null;      // 1 USD = rate KRW
+let rateDate = null;  // 환율 기준 날짜 (YYYY-MM-DD)
+
+const fmtUsd = n => "$" + n.toLocaleString("en-US", { maximumFractionDigits: 2 });
+const fmtKrw = n => Math.round(n).toLocaleString("ko-KR") + "원";
+const toKrw = (usd, r = rate) => (r ? fmtKrw(usd * r) : "환율 없음");
+
+// 빈칸·음수·숫자가 아니면 null
+function readNumber(input) {
+  const v = input.value.trim();
+  if (v === "") return null;
+  const n = Number(v);
+  return Number.isFinite(n) && n >= 0 ? n : null;
+}
+
+// ----- 기록 (ad_days) -----
+// 저장 형태: { "YYYY-MM-DD": { budget, spent, final, rate, rateDate } }
+function loadDays() {
+  const d = load("ad_days", {});
+  return d && typeof d === "object" && !Array.isArray(d) ? d : {};
+}
+function getToday() {
+  return loadDays()[TODAY] || {};
+}
+function updateToday(patch) {
+  const days = loadDays();
+  days[TODAY] = Object.assign({}, days[TODAY], patch);
+  if (rate) {
+    days[TODAY].rate = rate;
+    days[TODAY].rateDate = rateDate;
+  }
+  save("ad_days", days);
+}
+
+// 예산 대비 소진율. 예산이 없으면 null
+function burn(budget, spent) {
+  if (!(budget > 0) || spent == null) return null;
+  return { pct: Math.round((spent / budget) * 100), remain: budget - spent };
+}
+
+// ----- 환율 -----
+async function fetchRate() {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const res = await fetch(API.rate, { signal: ctrl.signal });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    const r = Number(data && data.rates && data.rates.KRW);
+    if (!r) throw new Error("no rate");
+    return { rate: r, date: String(data.date || "") };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function renderRate(state) {
+  const fmtRate = r => r.toLocaleString("ko-KR", { maximumFractionDigits: 2 }) + "원";
+  $("rate-value").textContent = rate ? fmtRate(rate) : "—";
+  $("api-date").textContent = rateDate || "—";
+  if (state === "ok") {
+    $("rate-meta").textContent = `1달러 기준 · 기준 날짜 ${rateDate} (유럽중앙은행 고시)`;
+    $("api-status").textContent = "정상 응답";
+    return;
+  }
+  $("rate-error").hidden = false;
+  if (state === "cache") {
+    $("rate-meta").textContent = `1달러 기준 · 기준 날짜 ${rateDate} (지난번 저장한 값)`;
+    $("rate-error").textContent = "데이터를 불러오지 못했어요. 지난번 받아 둔 환율로 계산해요.";
+    $("api-status").textContent = "불러오기 실패 · 저장된 환율 사용";
+  } else {
+    $("rate-meta").textContent = "1달러 기준";
+    $("rate-error").textContent = "데이터를 불러오지 못했어요. 원화 환산 없이 달러로만 기록돼요.";
+    $("api-status").textContent = "불러오기 실패";
+  }
+}
+
+// ----- 아침 -----
+function renderMorning() {
+  const n = readNumber($("budget-input"));
+  $("budget-krw").textContent = n === null ? "—" : toKrw(n);
+  const day = getToday();
+  $("budget-saved").hidden = day.budget == null;
+  $("budget-saved-text").textContent = day.budget == null ? "" : `오늘 예산 ${fmtUsd(day.budget)}`;
+}
+
+// ----- 점심 -----
+function renderLunch() {
+  const day = getToday();
+  const hasBudget = day.budget > 0;
+  const sub = $("lunch-budget");
+  if (hasBudget) {
+    sub.textContent = `오늘 예산 ${fmtUsd(day.budget)} · ${toKrw(day.budget)}`;
+  } else {
+    sub.innerHTML = '아직 오늘 예산이 없어요. <a href="?t=morning">아침 화면</a>에서 먼저 넣어 주세요.';
+  }
+
+  const b = burn(day.budget, day.spent);
+  const pct = b ? b.pct : 0;
+  $("lunch-pct").textContent = b ? pct + "%" : "—";
+  $("lunch-bar-fill").style.width = Math.min(pct, 100) + "%";
+  $("lunch-bar").setAttribute("aria-valuenow", Math.min(pct, 100));
+
+  if (!b) {
+    $("lunch-detail").textContent = day.spent != null ? `쓴 금액 ${fmtUsd(day.spent)} · ${toKrw(day.spent)}` : "쓴 금액을 넣으면 소진율이 보여요.";
+    $("lunch-over").hidden = true;
+    return;
+  }
+  $("lunch-detail").textContent = `${fmtUsd(day.spent)} / ${fmtUsd(day.budget)} 사용 · 쓴 금액 ${toKrw(day.spent)}`;
+  if (b.remain < 0) {
+    $("lunch-over").hidden = false;
+    $("lunch-over-text").textContent = `예산을 ${fmtUsd(-b.remain)} (${toKrw(-b.remain)}) 넘었어요`;
+  } else {
+    $("lunch-over").hidden = true;
+    $("lunch-detail").textContent += ` · 남은 예산 ${fmtUsd(b.remain)} (${toKrw(b.remain)})`;
+  }
+}
+
+// ----- 저녁 -----
+function renderEvening() {
+  const day = getToday();
+  $("evening-budget").textContent = day.budget > 0
+    ? `오늘 예산 ${fmtUsd(day.budget)} · 점심 기록 ${day.spent != null ? fmtUsd(day.spent) : "없음"}`
+    : "오늘 예산 기록이 없어요. 지출만 저장할 수 있어요.";
+
+  const n = readNumber($("final-input"));
+  $("final-krw").textContent = n === null ? "—" : toKrw(n);
+  const b = burn(day.budget, n);
+  $("final-detail").textContent = b ? `예산 대비 ${b.pct}% 사용` : "";
+
+  $("final-saved").hidden = day.final == null;
+  $("final-saved-text").textContent = day.final == null ? "" : `오늘 최종 지출 ${fmtUsd(day.final)}`;
+}
+
+function renderHistory() {
+  const days = loadDays();
+  const dates = Object.keys(days).sort().reverse().slice(0, 14);
+  const body = $("history-body");
+  body.innerHTML = "";
+  $("history-empty").hidden = dates.length > 0;
+  $("history-wrap").hidden = dates.length === 0;
+
+  dates.forEach(date => {
+    const d = days[date] || {};
+    const spent = d.final != null ? d.final : d.spent;
+    const b = burn(d.budget, spent);
+    const cells = [
+      date === TODAY ? date + " (오늘)" : date,
+      d.budget != null ? fmtUsd(d.budget) : "—",
+      spent != null ? fmtUsd(spent) + (d.final == null ? " (중간)" : "") : "—",
+      spent != null ? toKrw(spent, d.rate || rate) : "—",
+      b ? b.pct + "%" : "—",
+    ];
+    const tr = document.createElement("tr");
+    cells.forEach((text, i) => {
+      const td = document.createElement("td");
+      if (i > 0) td.className = "ad-num";
+      td.textContent = text;
+      tr.append(td);
+    });
+    body.append(tr);
+  });
+}
+
+function renderAll() {
+  renderMorning();
+  renderLunch();
+  renderEvening();
+  renderHistory();
+}
+
+// 폼 공통 처리: 숫자 확인 → 저장 → 다시 그리기
+function bindForm(formId, inputId, hintId, onSave) {
+  $(formId).addEventListener("submit", e => {
+    e.preventDefault();
+    const n = readNumber($(inputId));
+    if (n === null) {
+      $(hintId).textContent = "0 이상의 숫자를 넣어 주세요.";
+      return;
+    }
+    $(hintId).textContent = "";
+    onSave(n);
+    renderAll();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  document.querySelectorAll(".ad-slots a").forEach(a => {
+    if (a.dataset.t === SLOT) a.setAttribute("aria-current", "true");
+  });
+  $("api-url").textContent = API.rate;
+
+  const day = getToday();
+  if (day.budget != null) $("budget-input").value = day.budget;
+  if (day.spent != null) $("spent-input").value = day.spent;
+  const finalValue = day.final != null ? day.final : day.spent;
+  if (finalValue != null) $("final-input").value = finalValue;
+
+  $("budget-input").addEventListener("input", renderMorning);
+  $("final-input").addEventListener("input", renderEvening);
+  bindForm("budget-form", "budget-input", "budget-hint", n => updateToday({ budget: n }));
+  bindForm("spent-form", "spent-input", "spent-hint", n => updateToday({ spent: n }));
+  bindForm("final-form", "final-input", "final-hint", n => updateToday({ final: n }));
+
+  renderAll();
+
+  try {
+    const got = await fetchRate();
+    rate = got.rate;
+    rateDate = got.date;
+    save("ad_rate", { rate, date: rateDate });
+    renderRate("ok");
+  } catch (e) {
+    const cached = load("ad_rate", null);
+    if (cached && Number(cached.rate) > 0) {
+      rate = Number(cached.rate);
+      rateDate = String(cached.date || "");
+      renderRate("cache");
+    } else {
+      renderRate("none");
+    }
+  }
+  renderAll();
+});
+</script>
+
+<script>
+// ===== 공통: 상단 메뉴 + 시간대 + 방문 기록 (4페이지 동일) =====
+function getSlot() {
+  const t = new URLSearchParams(location.search).get("t");
+  if (["morning", "lunch", "evening"].includes(t)) return t;
+  const h = new Date().getHours();
+  if (h >= 6 && h < 11) return "morning";
+  if (h >= 11 && h < 16) return "lunch";
+  return "evening";
+}
+const SLOT = getSlot();
+const TODAY = new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD
+function load(k, d) { try { const v = localStorage.getItem("mkt_" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+function save(k, v) { try { localStorage.setItem("mkt_" + k, JSON.stringify(v)); } catch (e) {} }
+
+let visits = load("visits", { date: TODAY, count: 0 });
+if (visits.date !== TODAY) visits = { date: TODAY, count: 0 };
+visits.count++; save("visits", visits);
+
+let streak = load("streak", { last: null, days: 0 });
+if (streak.last !== TODAY) {
+  const y = new Date(Date.now() - 86400000).toLocaleDateString("sv-SE");
+  streak.days = streak.last === y ? streak.days + 1 : 1;
+  streak.last = TODAY; save("streak", streak);
+}
+
+const SLOT_NAME = { morning: "🌅 아침", lunch: "☀️ 점심", evening: "🌙 저녁" }[SLOT];
+const bar = document.createElement("div");
+bar.innerHTML = `<nav style="padding:10px;border-bottom:1px solid #ddd">
+  <a href="index.html">홈</a> · <a href="ad.html">광고비 환산</a> ·
+  <a href="season.html">시즌 D-day</a> · <a href="weather.html">날씨 소재</a></nav>
+  <p style="padding:0 10px">${SLOT_NAME} · 오늘 ${visits.count}번째 방문 · 연속 ${streak.days}일째</p>`;
+document.body.prepend(bar);
+
+// data-slot="morning|lunch|evening" 이 붙은 영역 중 지금 시간대만 보이기
+document.querySelectorAll("[data-slot]").forEach(el => { el.hidden = el.dataset.slot !== SLOT; });
+</script>
+</body>
+</html>
