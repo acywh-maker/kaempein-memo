@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Figtree:wght@400;500;600;700&family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
 <style>
-  /* DESIGN.md 토큰 */
+  /* DESIGN.md 토큰 — 모바일 우선, 크기는 화면 너비에 따라 부드럽게 커짐(clamp) */
   :root {
     --color-cream: #ffffeb;
     --color-ink: #1a1a1a;
@@ -25,33 +25,30 @@
     --font-display: 'EB Garamond', 'Noto Serif KR', serif;
     --font-body: 'Figtree', 'Pretendard Variable', 'Pretendard', system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
 
-    --text-display: 120px;
-    --text-heading-lg: 64px;
-    --text-heading: 48px;
-    --text-heading-sm: 32px;
+    /* 390px → 1200px 사이에서 선형으로 커짐 */
+    --text-display: clamp(56px, 2.5rem + 6vw, 120px);
+    --text-heading-lg: clamp(34px, 1.5rem + 3.5vw, 64px);
+    --text-heading-sm: clamp(24px, 1rem + 1.5vw, 32px);
+    --text-lead: clamp(16px, 0.875rem + 0.5vw, 20px);
+
+    --gutter: clamp(16px, 4vw, 40px);
+    --stack-gap: clamp(24px, 3vw, 32px);
+    --card-padding: clamp(20px, 3vw, 32px);
+    --hero-pad-y: clamp(32px, 5vw, 56px);
+    --hero-pad-x: clamp(24px, 5vw, 64px);
 
     --border-ink: 2px solid var(--color-ink);
     --radius-tag: 8px;
     --radius-control: 12px;
-    --radius-card: 32px;
-    --radius-section: 64px;
+    --radius-card: clamp(24px, 3vw, 32px);
+    --radius-section: clamp(32px, 5vw, 64px);
     --radius-pill: 9999px;
-    --card-padding: 32px;
-  }
-  @media (max-width: 768px) {
-    :root {
-      --text-display: 56px;
-      --text-heading-lg: 40px;
-      --text-heading: 32px;
-      --text-heading-sm: 26px;
-      --card-padding: 24px;
-      --radius-section: 32px;
-    }
   }
 
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
 
+  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
     background: var(--color-cream);
@@ -60,42 +57,46 @@
     font-size: 16px;
     line-height: 1.5;
     word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
   /* 공통 코드가 body 맨 앞에 넣는 메뉴 바를 디자인에 맞춰 꾸밈 (공통 코드는 수정하지 않음) */
   body > div:first-child {
     max-width: 1200px;
-    margin: 16px auto 0;
-    padding: 0 16px;
+    margin: 12px auto 0;
+    padding: 0 max(var(--gutter), env(safe-area-inset-right)) 0 max(var(--gutter), env(safe-area-inset-left));
   }
   body > div:first-child > nav {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 4px 6px;
-    padding: 10px 20px !important;
+    gap: 2px;
+    padding: 8px 12px !important;
     border: var(--border-ink) !important;
     border-radius: var(--radius-pill);
     background: var(--color-cream);
     color: var(--color-fog);
+    font-size: 14px;
     font-weight: 500;
   }
   body > div:first-child > nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 4px 4px;
     color: var(--color-charcoal);
     text-decoration: none;
-    padding: 4px 6px;
   }
-  body > div:first-child > nav a:hover { text-decoration: underline; }
   body > div:first-child > nav a[href="season.html"] {
     background: var(--color-lavender);
     border: var(--border-ink);
     border-radius: var(--radius-control);
-    padding: 4px 12px;
+    padding: 2px 8px;
   }
   body > div:first-child > p {
-    margin: 12px 0 0;
+    margin: 10px 0 0;
     padding: 0 4px !important;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--color-fog-dark);
   }
 
@@ -107,34 +108,35 @@
   main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 24px 16px 96px;
+    padding: 20px max(var(--gutter), env(safe-area-inset-right)) calc(64px + env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: var(--stack-gap);
   }
 
-  /* 상단: 가장 가까운 공휴일 (다크 챔버) */
+  /* 상단: 가장 가까운 공휴일 (다크 챔버) — 모바일은 세로, 태블릿 이상은 좌우 */
   .hero {
     background: var(--color-ink);
     color: var(--color-cream);
     border-radius: var(--radius-section);
-    padding: 56px 64px;
+    padding: var(--hero-pad-y) var(--hero-pad-x);
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     align-items: end;
-    gap: 24px 48px;
+    gap: 20px 48px;
   }
   .hero-name {
-    margin: 20px 0 8px;
+    margin: 16px 0 8px;
     font-family: var(--font-display);
     font-weight: 400;
     font-size: var(--text-heading-lg);
     line-height: 1.1;
     letter-spacing: -0.03em;
   }
-  .hero-date { margin: 0; font-size: 20px; color: var(--color-stone); }
+  .hero-date { margin: 0; font-size: var(--text-lead); color: var(--color-stone); }
   .hero-dday {
     margin: 0;
+    justify-self: start;
     font-family: var(--font-display);
     font-weight: 400;
     font-size: var(--text-display);
@@ -148,7 +150,7 @@
     height: 14px;
     margin-top: 4px;
   }
-  .hero-error { margin: 20px 0 0; font-size: 20px; color: var(--color-stone); }
+  .hero-error { margin: 16px 0 0; font-size: var(--text-lead); color: var(--color-stone); }
 
   .badge {
     display: inline-flex;
@@ -177,7 +179,10 @@
   }
   .slots-label { font-size: 14px; color: var(--color-fog-dark); margin-right: 4px; }
   .slots a {
-    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 18px;
     border: var(--border-ink);
     border-radius: var(--radius-pill);
     color: var(--color-ink);
@@ -186,7 +191,6 @@
     font-size: 14px;
     background: var(--color-cream);
   }
-  .slots a:hover { background: var(--color-stone); }
   .slots a[aria-current="true"] { background: var(--color-lavender); }
 
   /* 카드 */
@@ -198,11 +202,9 @@
   }
   .card-head {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 8px 16px;
-    margin-bottom: 24px;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 20px;
   }
   .card-title {
     margin: 0;
@@ -215,24 +217,24 @@
   .card-sub { margin: 0; font-size: 14px; color: var(--color-fog-dark); }
   .msg { margin: 0; color: var(--color-fog-dark); }
 
-  /* 아침: 공휴일 목록 */
+  /* 아침: 공휴일 목록 — 모바일은 줄 목록, 데스크톱은 5칸 타일 */
   .holidays { list-style: none; margin: 0; padding: 0; }
   .holidays li {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
     gap: 4px 16px;
-    padding: 16px 0;
+    padding: 14px 0;
     border-top: 2px solid var(--color-stone);
   }
   .holidays li:first-child { border-top: none; padding-top: 0; }
   .holidays li:last-child { padding-bottom: 0; }
-  .h-name { font-size: 20px; font-weight: 600; }
+  .h-name { font-size: 18px; font-weight: 600; }
   .h-date { grid-column: 1; font-size: 14px; color: var(--color-fog-dark); }
   .tag {
     grid-row: 1 / span 2;
     grid-column: 2;
-    padding: 8px 16px;
+    padding: 8px 14px;
     border-radius: var(--radius-tag);
     background: var(--color-ink);
     color: var(--color-cream);
@@ -242,21 +244,22 @@
   }
   .holidays li.is-next .tag { background: var(--color-lavender); color: var(--color-ink); border: var(--border-ink); }
 
-  /* 점심: 체크리스트 */
-  .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  /* 점심: 체크리스트 — 모바일 1열, 태블릿 2열, 데스크톱 4열 */
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 12px; }
   .checks label {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 16px 20px;
+    min-height: 56px;
+    height: 100%;
+    padding: 14px 18px;
     border: var(--border-ink);
     border-radius: var(--radius-control);
     background: var(--color-cream);
     cursor: pointer;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
   }
-  .checks label:hover { background: var(--color-stone); }
   .checks input {
     appearance: none;
     -webkit-appearance: none;
@@ -280,8 +283,8 @@
   }
   .checks input:checked + span { text-decoration: line-through; color: var(--color-fog-dark); }
 
-  /* 저녁: 완료율 + 메모 */
-  .evening-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  /* 저녁: 완료율 + 메모 — 모바일 세로, 태블릿 이상 좌우 */
+  .evening-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
   .rate {
     margin: 0 0 16px;
     font-family: var(--font-display);
@@ -302,19 +305,21 @@
 
   .memo-form { display: flex; flex-direction: column; gap: 12px; }
   .memo-form label { font-weight: 600; }
-  .memo-row { display: flex; gap: 8px; }
+  .memo-row { display: flex; flex-direction: column; gap: 8px; }
   .memo-row input {
     flex: 1;
     min-width: 0;
+    min-height: 52px;
     padding: 14px 16px;
     border: var(--border-ink);
     border-radius: var(--radius-control);
     background: var(--color-cream);
     color: var(--color-ink);
-    font: 400 16px var(--font-body);
+    font: 400 16px var(--font-body); /* 16px 이상이어야 iOS가 확대하지 않음 */
   }
   .memo-row input::placeholder { color: var(--color-fog-dark); }
   .btn {
+    min-height: 52px;
     padding: 14px 24px;
     border: var(--border-ink);
     border-radius: var(--radius-control);
@@ -324,16 +329,88 @@
     cursor: pointer;
     white-space: nowrap;
   }
-  .btn:hover { background: var(--color-lavender-hover); }
   .memo-saved { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; font-size: 14px; color: var(--color-fog-dark); }
 
-  @media (max-width: 768px) {
-    body > div:first-child > nav { padding: 8px 12px !important; font-size: 14px; gap: 2px; }
-    body > div:first-child > nav a { padding: 4px 4px; }
-    body > div:first-child > nav a[href="season.html"] { padding: 4px 8px; }
-    .hero { grid-template-columns: 1fr; padding: 40px 28px; }
-    .evening-grid { grid-template-columns: 1fr; }
-    .memo-row { flex-direction: column; }
+  /* 마우스가 있는 기기에서만 hover (터치에서 색이 남는 문제 방지) */
+  @media (hover: hover) {
+    body > div:first-child > nav a:hover { text-decoration: underline; }
+    .slots a:hover { background: var(--color-stone); }
+    .slots a[aria-current="true"]:hover { background: var(--color-lavender-hover); }
+    .checks label:hover { background: var(--color-stone); }
+    .btn:hover { background: var(--color-lavender-hover); }
+  }
+
+  /* 아주 작은 폰 (≤ 360px) */
+  @media (max-width: 360px) {
+    body > div:first-child > nav { font-size: 13px; padding: 6px 10px !important; }
+    .slots-label { width: 100%; }
+    .tag { padding: 6px 10px; font-size: 13px; }
+  }
+
+  /* 큰 폰 · 작은 태블릿 (≥ 560px) */
+  @media (min-width: 560px) {
+    .checks { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* 메모 입력칸 + 버튼 가로 배치: 저녁 카드가 한 줄일 때(560~767) 또는 넓을 때(≥ 1024)만 */
+  @media (min-width: 560px) and (max-width: 767px), (min-width: 1024px) {
+    .memo-row { flex-direction: row; }
+  }
+
+  /* 태블릿 (≥ 768px) */
+  @media (min-width: 768px) {
+    body > div:first-child { margin-top: 16px; }
+    body > div:first-child > nav { gap: 4px 6px; padding: 10px 20px !important; font-size: 16px; }
+    body > div:first-child > nav a { padding: 4px 6px; }
+    body > div:first-child > nav a[href="season.html"] { padding: 4px 12px; }
+    body > div:first-child > p { font-size: 14px; }
+    main { padding-top: 24px; }
+
+    .hero { grid-template-columns: 1fr auto; }
+    .hero-dday { justify-self: end; }
+
+    .card-head {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px 16px;
+      margin-bottom: 24px;
+    }
+    .evening-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+    .h-name { font-size: 20px; }
+  }
+
+  /* 데스크톱 (≥ 1024px) */
+  @media (min-width: 1024px) {
+    main { padding-bottom: 96px; }
+    .checks { grid-template-columns: repeat(4, 1fr); }
+    .checks label { flex-direction: column; align-items: flex-start; justify-content: space-between; min-height: 140px; padding: 20px; font-size: 20px; }
+
+    /* 공휴일 5개를 가로 타일로 */
+    .holidays { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .holidays li,
+    .holidays li:first-child,
+    .holidays li:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 20px;
+      border: var(--border-ink);
+      border-radius: var(--radius-control);
+    }
+    .holidays li.is-next { background: var(--color-lavender); }
+    .holidays li.is-next .tag { background: var(--color-ink); color: var(--color-cream); border: none; }
+    .tag { order: -1; margin-bottom: 8px; }
+    .h-name { font-size: 22px; line-height: 1.3; }
+  }
+
+  /* 가로로 눕힌 폰: 상단 카드가 화면을 다 차지하지 않게 */
+  @media (max-height: 500px) and (orientation: landscape) {
+    :root { --text-display: 64px; --text-heading-lg: 36px; --hero-pad-y: 24px; }
+    .hero { grid-template-columns: 1fr auto; }
+    .hero-dday { justify-self: end; }
   }
 </style>
 </head>
