@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Figtree:wght@400;500;600;700&family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<title>날씨 마케팅 소재</title>
+<style>
+:root {
+  /* Colors */
+  --color-cream: #ffffeb;
+  --color-ink: #1a1a1a;
+  --color-lavender: #f0d7ff;
+  --color-lavender-hover: #e6c4fa;
+  --color-forest: #034f46;
+  --color-ember: #ffa946;
+  --color-stone: #e4e4d0;
+  --color-fog: #8a8a80;
+  --color-fog-dark: #6b6b62;
+  --color-charcoal: #222222;
+  --color-white: #ffffff;
+
+  /* Fonts */
+  --font-display: 'EB Garamond', 'Noto Serif KR', serif;
+  --font-body: 'Figtree', 'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
+
+  /* Type scale */
+  --text-caption: 14px;     --leading-caption: 1.4;
+  --text-body-sm: 16px;     --leading-body-sm: 1.5;
+  --text-body: 20px;        --leading-body: 1.5;
+  --text-subheading: 24px;  --leading-subheading: 1.4;
+  --text-heading-sm: 32px;  --leading-heading-sm: 1.3;  --tracking-heading-sm: -0.03em;
+  --text-heading: 48px;     --leading-heading: 1.15;    --tracking-heading: -0.02em;
+  --text-heading-lg: 64px;  --leading-heading-lg: 1.1;  --tracking-heading-lg: -0.03em;
+  --text-display: 120px;    --leading-display: 1.05;    --tracking-display: -0.03em;
+
+  /* Spacing (8px base) */
+  --space-8: 8px;   --space-16: 16px; --space-24: 24px; --space-32: 32px;
+  --space-40: 40px; --space-48: 48px; --space-56: 56px; --space-64: 64px;
+  --space-80: 80px; --space-96: 96px; --space-128: 128px;
+
+  /* Radius */
+  --radius-tag: 8px;
+  --radius-control: 12px;
+  --radius-card: 32px;
+  --radius-section: 64px;
+  --radius-pill: 9999px;
+
+  /* Border */
+  --border-ink: 2px solid var(--color-ink);
+
+  /* Layout */
+  --page-max-width: 1200px;
+  --section-gap: 96px;
+  --card-padding: 32px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --text-display: 56px;
+    --text-heading-lg: 40px;
+    --text-heading: 32px;
+    --section-gap: 48px;
+    --card-padding: 24px;
+    --radius-section: 32px;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-body-sm);
+  word-break: keep-all; /* 한글 단어 중간에서 줄바꿈되지 않게 */
+}
+
+.btn {
+  font: 500 16px/1 var(--font-body);
+  padding: 16px 24px;
+  border: var(--border-ink);
+  border-radius: var(--radius-control);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.btn--primary   { background: var(--color-lavender); }
+.btn--primary:hover { background: var(--color-lavender-hover); }
+.btn--secondary { background: var(--color-cream); }
+.btn--secondary:hover { background: var(--color-stone); }
+.btn:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+
+.card {
+  background: var(--color-cream);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  padding: var(--card-padding);
+}
+.card--dark {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  border: none;
+  border-radius: var(--radius-section);
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 14px/1 var(--font-body);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+}
+.badge--status { background: var(--color-forest); color: var(--color-cream); }
+
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+/* ===== 공통 메뉴 블록 (4페이지 동일, 수정 금지) ===== */
+body > div:first-child > nav {
+  max-width: var(--page-max-width);
+  margin: var(--space-16) auto !important;
+  padding: 12px var(--space-24) !important;
+  background: var(--color-cream);
+  border: var(--border-ink) !important;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+}
+body > div:first-child > nav a {
+  color: var(--color-charcoal);
+  font-weight: 500;
+  text-decoration: none;
+}
+body > div:first-child > nav a:hover { text-decoration: underline; }
+body > div:first-child > p {
+  max-width: var(--page-max-width);
+  margin: 0 auto !important;
+  padding: 0 var(--space-24) !important;
+  color: var(--color-fog-dark);
+  font-size: var(--text-caption);
+}
+/* ===== 공통 메뉴 블록 끝 ===== */
+
+/* ===== 날씨 소재 전용 ===== */
+main { max-width: var(--page-max-width); margin: 0 auto; padding: 0 var(--space-24) var(--space-64); }
+main .card { margin: var(--space-32) 0; }
+.page-title { font-family: var(--font-display); font-weight: 400; font-size: var(--text-heading-lg); line-height: var(--leading-heading-lg); letter-spacing: var(--tracking-heading-lg); margin: var(--space-32) 0 0; }
+h2 { font-size: var(--text-subheading); line-height: var(--leading-subheading); font-weight: 600; margin: 0 0 var(--space-8); }
+h2.sub { margin-top: var(--space-24); }
+.temp { font-family: var(--font-display); font-weight: 400; font-size: var(--text-heading); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-8); padding: 0; list-style: none; margin: var(--space-8) 0 0; }
+.chip { display: flex; align-items: center; gap: var(--space-8); background: var(--color-lavender); border: var(--border-ink); border-radius: var(--radius-pill); padding: var(--space-8) var(--space-16); font-size: var(--text-body-sm); }
+.chip .btn { padding: var(--space-8) var(--space-16); font-size: var(--text-caption); line-height: 1; border-radius: var(--radius-pill); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-body-sm); }
+th { background: var(--color-ink); color: var(--color-cream); padding: var(--space-8) var(--space-16); text-align: left; font-weight: 500; }
+td { padding: var(--space-8) var(--space-16); border-bottom: 2px solid var(--color-stone); }
+th.num, td.num { text-align: right; }
+.err { font-weight: 600; }
+.muted { color: var(--color-fog-dark); font-size: var(--text-caption); line-height: var(--leading-caption); }
+.card--dark .muted { color: var(--color-stone); }
+</style>
+</head>
+<body>
+<main>
+  <h1 class="page-title">🌤 날씨 마케팅 소재</h1>
+
+  <section class="card" data-slot="morning">
+    <h2>오늘 날씨 요약</h2>
+    <div id="m-summary" class="muted">불러오는 중…</div>
+    <h2 class="sub">오늘 추천 소재 3개</h2>
+    <ul id="m-ideas" class="chips"></ul>
+  </section>
+
+  <section class="card" data-slot="lunch">
+    <h2>오후(12~18시) 기온·강수확률</h2>
+    <div id="l-table" class="muted">불러오는 중…</div>
+    <h2 class="sub">오후에 올릴 콘텐츠</h2>
+    <ul id="l-ideas" class="chips"></ul>
+  </section>
+
+  <section class="card" data-slot="evening">
+    <h2>내일 날씨</h2>
+    <div id="e-summary" class="muted">불러오는 중…</div>
+    <h2 class="sub">내일 추천 소재</h2>
+    <ul id="e-ideas" class="chips"></ul>
+    <h2 class="sub">저장한 소재</h2>
+    <ul id="e-saved" class="chips"></ul>
+  </section>
+
+  <section class="card card--dark" id="api-box">
+    <h2>🔌 이 화면이 쓰는 API</h2>
+    <div class="muted">Weather data by Open-Meteo.com · <span id="api-date">예보 기준일: 불러오는 중…</span></div>
+    <div class="muted" id="api-url" style="word-break:break-all"></div>
+  </section>
+</main>
+
+<script>
+// ===== 날씨 소재 (weather.html 전용) =====
+const API = {
+  forecast: "https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.978&hourly=temperature_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FSeoul&forecast_days=2", // 🔌 Open-Meteo 서울 예보 (키 없음)
+};
+const FAIL = "데이터를 불러오지 못했어요";
+
+// 조건별 추천 규칙: 위에서부터 먼저 맞는 것을 쓴다
+// 조건마다 시간대별로 소재 6개씩: 아침=오늘 프로모션, 점심=오후 콘텐츠, 저녁=내일 준비
+const IDEAS = {
+  rain: {
+    morning: ["배달 앱 쿠폰", "실내 데이트 코스", "우산 증정 이벤트", "비 오는 날 출근길 한정 할인", "집콕 간식 기획전", "레인부츠·방수 용품"],
+    lunch: ["빗소리 감성 숏폼", "비 오는 날 점심 배달 후기", "실내 놀거리 카드뉴스", "우산 속 인증샷 이벤트", "따뜻한 국물 메뉴 소개", "\"오늘 비 오네요\" 공감 한 줄 포스트"],
+    evening: ["내일 우천 대비 배달 선예약", "실내 전시·영화 제휴 콘텐츠", "우산 무료 대여 안내", "비 오는 주말 집콕 키트", "제습 용품 기획전", "퇴근길 비 알림 푸시 문구"],
+  },
+  hot: {
+    morning: ["아이스 음료 1+1", "여름 세일 오픈", "쿨링 기획전", "냉감 패션·침구", "선풍기·휴대용 쿨러", "자외선 차단 케어"],
+    lunch: ["시원한 점심 메뉴 추천", "더위 탈출 숏폼 챌린지", "아이스 음료 인증샷 이벤트", "폭염 대비 체크리스트", "빙수·냉면 카드뉴스", "그늘 쉼터 위치 안내"],
+    evening: ["내일 폭염 대비 얼리버드 세일", "열대야 숙면 용품 소개", "야간 수영·워터파크 제휴", "퇴근 후 시원한 맥주 기획", "여름 휴가 예약 푸시", "냉감 소재 신상 티저"],
+  },
+  cold: {
+    morning: ["따뜻한 음료 신메뉴", "패딩 시즌 특가", "보온 용품 기획전", "핫팩·방한 소품 증정", "겨울 이불·전기장판", "출근길 방한 룩북"],
+    lunch: ["따뜻한 국물 점심 추천", "김이 모락모락 숏폼 영상", "핫초코 인증샷 이벤트", "한파 대비 체크리스트", "온기 가득 카페 소개", "겨울 간식 카드뉴스"],
+    evening: ["내일 한파 대비 얼리버드 패딩", "온열 제품 후기 모음", "겨울 여행 예약 푸시", "퇴근길 군고구마 쿠폰", "난방비 절약 팁 콘텐츠", "방한 신상 티저"],
+  },
+  mild: {
+    morning: ["야외 나들이", "피크닉 세트", "러닝·산책 챌린지", "테라스 카페 프로모션", "캠핑·등산 용품", "자전거 라이딩 코스"],
+    lunch: ["점심 산책 인증 이벤트", "공원 도시락 메뉴", "햇살 감성 사진 콘텐츠", "야외 좌석 맛집 카드뉴스", "오후 커피 한 잔 쿠폰", "가벼운 아웃도어 룩"],
+    evening: ["내일 나들이 코스 추천", "주말 피크닉 예약 오픈", "노을 명소 소개", "야외 러닝 크루 모집", "여행 상품 티저", "내일 소풍 도시락 사전 주문"],
+  },
+};
+// 날짜(일)가 짝수면 앞 3개, 홀수면 뒤 3개 → 오늘과 내일은 항상 다른 소재
+function recommend(rain, tmax, slot, dateStr) {
+  const cond = rain >= 60 ? "rain" : tmax >= 28 ? "hot" : tmax <= 10 ? "cold" : "mild";
+  const start = +dateStr.slice(8, 10) % 2 ? 3 : 0;
+  return IDEAS[cond][slot].slice(start, start + 3);
+}
+
+function el(tag, text, cls) {
+  const e = document.createElement(tag);
+  e.textContent = text;
+  if (cls) e.className = cls;
+  return e;
+}
+function showError(id) { const t = document.getElementById(id); t.textContent = FAIL; t.className = "err"; }
+function summary(box, d, i) {
+  box.className = "";
+  box.replaceChildren(
+    el("div", `${d.temperature_2m_min[i]}° ~ ${d.temperature_2m_max[i]}°C`, "temp"),
+    el("div", `비 올 확률 최대 ${d.precipitation_probability_max[i]}%`)
+  );
+}
+function ideaList(ul, ideas, saveable) {
+  ul.replaceChildren(...ideas.map(name => {
+    const li = el("li", "", "chip");
+    li.append(name);
+    if (saveable) {
+      const b = el("button", "저장", "btn btn--secondary");
+      b.onclick = () => {
+        const saved = load("weather_saved", []);
+        if (!saved.includes(name)) { saved.push(name); save("weather_saved", saved); }
+        renderSaved();
+      };
+      li.append(b);
+    }
+    return li;
+  }));
+}
+function renderSaved() {
+  const saved = load("weather_saved", []);
+  const ul = document.getElementById("e-saved");
+  if (!saved.length) { ul.replaceChildren(el("li", "아직 저장한 소재가 없어요", "muted")); return; }
+  ul.replaceChildren(...saved.map(name => {
+    const li = el("li", "", "chip");
+    li.append(name);
+    const b = el("button", "삭제", "btn btn--secondary");
+    b.onclick = () => { save("weather_saved", load("weather_saved", []).filter(n => n !== name)); renderSaved(); };
+    li.append(b);
+    return li;
+  }));
+}
+
+function renderMorning(d) {
+  summary(document.getElementById("m-summary"), d, 0);
+  ideaList(document.getElementById("m-ideas"), recommend(d.precipitation_probability_max[0], d.temperature_2m_max[0], "morning", d.time[0]));
+}
+function renderLunch(h) {
+  const rows = [];
+  h.time.forEach((t, i) => {
+    const hour = +t.slice(11, 13);
+    if (t.slice(0, 10) === TODAY && hour >= 12 && hour <= 18) rows.push({ hour, temp: h.temperature_2m[i], rain: h.precipitation_probability[i] });
+  });
+  if (!rows.length) { showError("l-table"); return; }
+  const table = document.createElement("table");
+  table.innerHTML = "<tr><th>시각</th><th class='num'>기온(°C)</th><th class='num'>강수확률(%)</th></tr>";
+  rows.forEach(r => {
+    const tr = document.createElement("tr");
+    tr.append(el("td", `${r.hour}시`), el("td", String(r.temp), "num"), el("td", String(r.rain), "num"));
+    table.append(tr);
+  });
+  const box = document.getElementById("l-table");
+  box.className = "";
+  box.replaceChildren(table);
+  ideaList(document.getElementById("l-ideas"), recommend(Math.max(...rows.map(r => r.rain)), Math.max(...rows.map(r => r.temp)), "lunch", TODAY));
+}
+function renderEvening(d) {
+  summary(document.getElementById("e-summary"), d, 1);
+  ideaList(document.getElementById("e-ideas"), recommend(d.precipitation_probability_max[1], d.temperature_2m_max[1], "evening", d.time[1]), true);
+}
+
+// 공통 코드의 SLOT·TODAY·load·save 가 정의된 뒤에 실행
+window.addEventListener("DOMContentLoaded", async () => {
+  const id = { morning: "m-summary", lunch: "l-table", evening: "e-summary" }[SLOT];
+  if (SLOT === "evening") renderSaved();
+  document.getElementById("api-url").textContent = API.forecast;
+  try {
+    const res = await fetch(API.forecast);
+    if (!res.ok) throw new Error("http");
+    const data = await res.json();
+    document.getElementById("api-date").textContent = `예보 기준일: ${data.daily.time[SLOT === "evening" ? 1 : 0]}`;
+    if (SLOT === "morning") renderMorning(data.daily);
+    else if (SLOT === "lunch") renderLunch(data.hourly);
+    else renderEvening(data.daily);
+  } catch (e) {
+    showError(id);
+    document.getElementById("api-date").textContent = "예보 기준일: 확인 불가";
+  }
+});
+</script>
+
+<script>
+// ===== 공통: 상단 메뉴 + 시간대 + 방문 기록 (4페이지 동일) =====
+function getSlot() {
+  const t = new URLSearchParams(location.search).get("t");
+  if (["morning", "lunch", "evening"].includes(t)) return t;
+  const h = new Date().getHours();
+  if (h >= 6 && h < 11) return "morning";
+  if (h >= 11 && h < 16) return "lunch";
+  return "evening";
+}
+const SLOT = getSlot();
+const TODAY = new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD
+function load(k, d) { try { const v = localStorage.getItem("mkt_" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+function save(k, v) { try { localStorage.setItem("mkt_" + k, JSON.stringify(v)); } catch (e) {} }
+
+let visits = load("visits", { date: TODAY, count: 0 });
+if (visits.date !== TODAY) visits = { date: TODAY, count: 0 };
+visits.count++; save("visits", visits);
+
+let streak = load("streak", { last: null, days: 0 });
+if (streak.last !== TODAY) {
+  const y = new Date(Date.now() - 86400000).toLocaleDateString("sv-SE");
+  streak.days = streak.last === y ? streak.days + 1 : 1;
+  streak.last = TODAY; save("streak", streak);
+}
+
+const SLOT_NAME = { morning: "🌅 아침", lunch: "☀️ 점심", evening: "🌙 저녁" }[SLOT];
+const bar = document.createElement("div");
+bar.innerHTML = `<nav style="padding:10px;border-bottom:1px solid #ddd">
+  <a href="index.html">홈</a> · <a href="ad.html">광고비 환산</a> ·
+  <a href="season.html">시즌 D-day</a> · <a href="weather.html">날씨 소재</a></nav>
+  <p style="padding:0 10px">${SLOT_NAME} · 오늘 ${visits.count}번째 방문 · 연속 ${streak.days}일째</p>`;
+document.body.prepend(bar);
+
+// data-slot="morning|lunch|evening" 이 붙은 영역 중 지금 시간대만 보이기
+document.querySelectorAll("[data-slot]").forEach(el => { el.hidden = el.dataset.slot !== SLOT; });
+</script>
+</body>
+</html>
